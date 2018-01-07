@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import Loader from 'components/Loader';
-import {startLoading, finishLoading} from 'actions/loaderAction';
 
 import './style.scss';
 
@@ -10,40 +8,29 @@ const mapStateToProps = state => ({
   loading: state.loading
 });
 
-const dispatchMapToProps = dispatch => ({
-  startLoading: () => dispatch(startLoading()),
-  finishLoading: () => dispatch(finishLoading())
-});
-
-@connect(mapStateToProps, dispatchMapToProps)
-class WeatherMap extends Component {
-  constructor() {
-    super();
-    
-    this.state = ({
-      lat: '',
-      lng: '',
-      zoom: 13
+@connect(mapStateToProps)
+export class WeatherMap extends Component {
+  componentDidMount() {
+    let map = new window.google.maps.Map(document.getElementById('map'), {
+      center: {lat: -33.8688, lng: 151.2195},
+      zoom: 13,
+      mapTypeId: 'roadmap'
     });
   }
   
   render() {
-    const {loading} = this.props;
-    const {lat, lng, zoom} = this.state;
-    const center = [lat, lng];
+    const {lat, lng, zoom} = this.props;
+    const center = { lat: lat, lng: lng }
     return (
       <div className='weather-map'>
-        {loading &&
-          <Loader/>
-        }
+        <div id='map'/>
       </div>
     );
-  };
+  }
 }
 
 WeatherMap.propTypes = {
-  loading: PropTypes.bool,
-  getPosition: PropTypes.func
+  zoom: PropTypes.number,
+  lat: PropTypes.number,
+  lng: PropTypes.number
 };
-
-export default WeatherMap;
