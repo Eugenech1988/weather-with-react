@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import GoogleMapReact from 'google-map-react';
 import Loader from 'components/Loader';
 import {startLoading, finishLoading} from 'actions/loaderAction';
 
 import './style.scss';
 
 const mapStateToProps = state => ({
-
+  loading: state.loading
 });
 
 const dispatchMapToProps = dispatch => ({
@@ -37,10 +36,6 @@ class WeatherMap extends Component {
         {loading &&
           <Loader/>
         }
-        <GoogleMapReact
-          defaultCenter={center}
-          defaultZoom={zoom}
-        />
       </div>
     );
   };
