@@ -30,7 +30,8 @@ export default class WeatherMap extends Component {
       const zoom = 16;
       const map = new window.google.maps.Map(mapDiv, {
         zoom,
-        center
+        center,
+        disableDefaultUI: true
       });
       map.panTo(center);
       new window.google.maps.Marker({

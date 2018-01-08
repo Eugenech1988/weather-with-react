@@ -1,0 +1,51 @@
+.current-weather__wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  transition: all .3s ease;
+  background: #cfe7fa; /* Old browsers */
+  background: -moz-linear-gradient(top, #cfe7fa 0%, #6393c1 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #cfe7fa 0%,#6393c1 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #cfe7fa 0%,#6393c1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#6393c1',GradientType=0 ); /* IE6-9 */
+  &--active {
+    width: 100%;
+    height: 70px;
+  }
+}
+
+.current-weather__open-btn {
+  padding: 10px;
+  border: 0;
+  background-color: transparent;
+  animation: glow 1.2s infinite;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  &--active {
+    animation: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.current-weather__open-icon {
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+
+@keyframes glow {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
