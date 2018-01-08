@@ -52,7 +52,8 @@ class CurrentWeather extends Component {
 }
 
 CurrentWeather.propTypes = {
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  userDetails: PropTypes.object
 };
 
 export default CurrentWeather;
