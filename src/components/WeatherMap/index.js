@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 @connect(mapStateToProps, mapDispatchToProps)
 export class WeatherMap extends Component {
   componentWillMount() {
-    const {getUserPosition, userDetails} = this.props;
+    const {getUserPosition} = this.props;
     getUserPosition();
   }
   
@@ -38,9 +38,12 @@ export class WeatherMap extends Component {
         map,
         zIndex: 1000
       });
-      window.google.maps.event.addDomListener(window, 'resize', function () {
+      window.google.maps.event.addDomListener(window, 'resize', () => {
         map.setCenter(center);
       });
+      // window.google.maps.event.addListener(map, 'click', function( event ){
+      //   alert( "Latitude: "+event.latLng.lat()+" "+", longitude: "+event.latLng.lng() );
+      // });
     }
   }
   
@@ -50,8 +53,6 @@ export class WeatherMap extends Component {
   
   render() {
     const {loading} = this.props;
-    // const {lat, lng, zoom} = this.props;
-    // const center = { lat: lat, lng: lng }
     return (
       <div className='weather-map'>
         {!loading &&

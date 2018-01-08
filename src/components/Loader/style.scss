@@ -23,6 +23,25 @@
   transform: translateZ(0);
   animation: load6 1.7s infinite ease, round 1.7s infinite ease;
 }
+
+.loader-fade-enter {
+  opacity: 0.01;
+}
+
+.loader-fade-enter.loader-fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.loader-fade-exit {
+  opacity: 1;
+}
+
+.loader-fade-exit.loader-fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
+}
+
 @-webkit-keyframes load6 {
   0% {
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;

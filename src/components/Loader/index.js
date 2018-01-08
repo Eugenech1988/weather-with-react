@@ -1,17 +1,29 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {CSSTransition} from 'react-transition-group';
 import './style.scss';
 
-const mapStateToProps = state => ({
-  loading: state.loading
-});
-
-@connect(mapStateToProps)
 class Loader extends React.Component {
+  state = {
+    show: false
+  };
+  
+  componentDidMount() {
+    this.setState({show: false});
+  }
+  
   render() {
+    const {show} = this.state;
     return (
-      <div className='loader-overlay'>
-        <div className='loader'/>
+      <div className='loader-wrap'>
+        <CSSTransition
+          in={show}
+          timeout={500}
+          classNames='loader-fade'
+        >
+          <div className='loader-overlay'>
+            <div className='loader'/>
+          </div>
+        </CSSTransition>
       </div>
     );
   }
