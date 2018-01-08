@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class WeatherMap extends Component {
+export default class WeatherMap extends Component {
   componentWillMount() {
     const {getUserPosition} = this.props;
     getUserPosition();
