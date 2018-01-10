@@ -47,22 +47,22 @@ class FiveDaysWeather extends Component {
             </div>
             <div className='forecast-weather__result-wrap'>
               <div className='forecast-weather__header'>
-                <div className='forecast-weather__header-item'>
+                <div className='forecast-weather__header-item forecast-weather__header-item--date'>
                   date
                 </div>
-                <div className='forecast-weather__header-item'>
+                <div className='forecast-weather__header-item forecast-weather__header-item--time'>
                   time
                 </div>
-                <div className='forecast-weather__header-item'>
+                <div className='forecast-weather__header-item forecast-weather__header-item--temp'>
                   temperature
                 </div>
-                <div className='forecast-weather__header-item'>
+                <div className='forecast-weather__header-item forecast-weather__header-item--draft'>
                   draft
                 </div>
-                <div className='forecast-weather__header-item'>
+                <div className='forecast-weather__header-item forecast-weather__header-item--w-speed'>
                   wind speed
                 </div>
-                <div className='forecast-weather__header-item'>
+                <div className='forecast-weather__header-item forecast-weather__header-item--w-deg'>
                   wind deg
                 </div>
               </div>
@@ -89,11 +89,11 @@ class FiveDaysWeather extends Component {
                       <div className='forecast-weather__item forecast-weather__item--temp'>
                         {draft}
                       </div>
-                      <div className='forecast-weather__item forecast-weather__item-wind-speed'>
+                      <div className='forecast-weather__item forecast-weather__item--w-speed'>
                         {windSpeed}&nbsp;MPS
                       </div>
-                      <div className='forecast-weather__item forecast-weather__item-wind-Deg'>
-                        {windDeg}
+                      <div className='forecast-weather__item forecast-weather__item--w-deg'>
+                        {windDeg}&#176;
                       </div>
                     </div>
                   )}
