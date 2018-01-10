@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {CSSTransition} from 'react-transition-group';
 
 import {getUserPosition} from 'actions/userAction';
 import {getDailyWeather, getFiveDaysWeather} from 'actions/weatherAction';
@@ -19,9 +20,17 @@ const mapDispatchToProps = dispatch => ({
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class WeatherMap extends Component {
+  state = {
+    show: false
+  };
+  
   componentWillMount() {
     const {getUserPosition} = this.props;
     getUserPosition();
+  }
+  
+  componentDidMount() {
+    this.setState({show: true});
   }
   
   componentWillReceiveProps(nextProps) {
@@ -57,9 +66,16 @@ export default class WeatherMap extends Component {
   }
   
   render() {
+    const {show} = this.state;
     return (
       <div className='weather-map'>
-        <div id='map'/>
+        <CSSTransition
+          in={show}
+          timeout={2000}
+          classNames='fade'
+        >
+          <div id='map'/>
+        </CSSTransition>
       </div>
     );
   }
