@@ -41,44 +41,68 @@ class FiveDaysWeather extends Component {
         classNames='fade'
       >
         <div className='forecast-weather__wrap'>
-          <div className='forecast-weather__heading'>
-            Five days weather forecast
-          </div>
-          <div className='forecast-weather__result-wrap'>
-            <div className='forecast-weather__header'>
-              <div className='forecast-weather__header-item'>
-                date
-              </div>
-              <div className='forecast-weather__header-item'>
-                time
-              </div>
-              <div className='forecast-weather__header-item'>
-                temperature
-              </div>
-              <div className='forecast-weather__header-item'>
-                humidity
-              </div>
-              <div className='forecast-weather__header-item'>
-                wind speed
-              </div>
-              <div className='forecast-weather__header-item'>
-                wind deg
-              </div>
+          <div className='forecaset-weather__inner-wrap'>
+            <div className='forecast-weather__heading'>
+              Five days weather forecast
             </div>
-            <div className="forecast-weather__content-wrap">
-              {
-                fiveDaysWeatherList.map(item => {
+            <div className='forecast-weather__result-wrap'>
+              <div className='forecast-weather__header'>
+                <div className='forecast-weather__header-item'>
+                  date
+                </div>
+                <div className='forecast-weather__header-item'>
+                  time
+                </div>
+                <div className='forecast-weather__header-item'>
+                  temperature
+                </div>
+                <div className='forecast-weather__header-item'>
+                  draft
+                </div>
+                <div className='forecast-weather__header-item'>
+                  wind speed
+                </div>
+                <div className='forecast-weather__header-item'>
+                  wind deg
+                </div>
+              </div>
+              <div className='forecast-weather__content-wrap'>
+                {fiveDaysWeatherList.map(item => {
+                  const key = Math.random();
+                  const date = item.dt_txt.substr(0, item.dt_txt.length - 9);
+                  const time = item.dt_txt.slice(10);
+                  const temp = Math.floor((item.main.temp / 10 - 32) * 5 / 9);
+                  const draft = item.weather[0].description;
+                  const windSpeed = Math.floor(item.wind.speed.toFixed(1));
+                  const windDeg = Math.floor(item.wind.deg.toFixed(1));
                   return (
-                    <div className="forecast-weather__item" key>
-                    
+                    <div className='forecast-weather__item-wrap' key={key}>
+                      <div className='forecast-weather__item forecast-weather__item--date'>
+                        {date}
+                      </div>
+                      <div className='forecast-weather__item forecast-weather__item--time'>
+                        {time}
+                      </div>
+                      <div className='forecast-weather__item forecast-weather__item--temp'>
+                        {temp}&nbsp;&#176;C
+                      </div>
+                      <div className='forecast-weather__item forecast-weather__item--temp'>
+                        {draft}
+                      </div>
+                      <div className='forecast-weather__item forecast-weather__item-wind-speed'>
+                        {windSpeed}&nbsp;MPS
+                      </div>
+                      <div className='forecast-weather__item forecast-weather__item-wind-Deg'>
+                        {windDeg}
+                      </div>
                     </div>
-                  );
-                })
-              }
+                  )}
+                )}
+              </div>
             </div>
-          </div>
-          <div className='forecast-weather__close-btn-wrap'>
-            <button className='forecast-weather__close-btn' onClick={::this.handleBackClick}>back to the map</button>
+            <div className='forecast-weather__close-btn-wrap'>
+              <button className='forecast-weather__close-btn' onClick={::this.handleBackClick}>back to the map</button>
+            </div>
           </div>
         </div>
       </CSSTransition>

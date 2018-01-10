@@ -6,7 +6,6 @@ import Loader from 'components/Loader';
 import CurrentWeather from 'components/CurrentWeather';
 import WeatherMap from 'components/WeatherMap';
 import FiveDaysWeather from 'components/FiveDaysWeather';
-import {forecastToggle} from "../../actions/weatherAction";
 
 const mapStateToProps = state => ({
   dailyWeather: state.weather.dailyWeather,

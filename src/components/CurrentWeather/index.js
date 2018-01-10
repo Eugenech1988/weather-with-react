@@ -61,8 +61,8 @@ class CurrentWeather extends Component {
     const cityName = dailyWeather.name;
     const temp = Math.floor((dailyWeather.main.temp / 10 - 32) * 5 / 9);
     const drafts = dailyWeather.weather[0].main;
-    const windSpeed = dailyWeather.wind.speed;
-    const windDeg = dailyWeather.wind.deg;
+    const windSpeed = Math.floor(dailyWeather.wind.speed.toFixed(1));
+    const windDeg = Math.floor(dailyWeather.wind.deg.toFixed(1));
     return (
       <div className={wrapCls}>
         {loading &&
