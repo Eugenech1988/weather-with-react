@@ -8,7 +8,7 @@ class Loader extends React.Component {
   };
   
   componentDidMount() {
-    this.setState({show: false});
+    this.setState({show: true});
   }
   
   render() {
@@ -17,8 +17,8 @@ class Loader extends React.Component {
       <div className='loader-wrap'>
         <CSSTransition
           in={show}
-          timeout={500}
-          classNames='loader-fade'
+          timeout={2000}
+          classNames='fade'
         >
           <div className='loader-overlay'>
             <div className='loader'/>

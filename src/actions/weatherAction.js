@@ -1,8 +1,13 @@
 import {getDailyWeatherApi} from 'api/GET/dailyWeather';
 import {geFiveDaysWeatherApi} from 'api/GET/fiveDaysWeather';
 
-import {GET_DAILY_WEATHER_ERROR, GET_DAILY_WEATHER_SUCCESS} from 'constants/weatherConst';
-import {GET_FIVE_DAYS_WEATHER_ERROR, GET_FIVE_DAYS_WEATHER_SUCCESS} from 'constants/weatherConst';
+import {
+  GET_DAILY_WEATHER_ERROR,
+  GET_DAILY_WEATHER_SUCCESS,
+  GET_FIVE_DAYS_WEATHER_ERROR,
+  GET_FIVE_DAYS_WEATHER_SUCCESS
+} from 'constants/weatherConst';
+import {FIVE_DAYS_COMPONENT_TOGGLE} from "../constants/weatherConst";
 
 export const getDailyWeatherSuccess = (data) => {
   return ({
@@ -45,12 +50,20 @@ export const getDailyWeather = (lat, lng) => dispatch => {
 };
 
 export const getFiveDaysWeather = (lat, lng) => dispatch => {
-  geFiveDaysWeatherApi(lat,lng)
+  geFiveDaysWeatherApi(lat, lng)
     .then(res => {
       console.log(res);
-      dispatch(getFiveDaysWeatherSuccess());
+      dispatch(getFiveDaysWeatherSuccess(res.data));
     })
     .catch(err => {
-    dispatch(getFiveDaysWeatherError());
+      console.log(err);
+      dispatch(getFiveDaysWeatherError());
     });
+};
+
+export const forecastToggle = (data) => {
+  return ({
+    type: FIVE_DAYS_COMPONENT_TOGGLE,
+    data
+  });
 };

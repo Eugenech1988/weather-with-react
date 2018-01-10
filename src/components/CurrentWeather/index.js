@@ -6,6 +6,7 @@ import cx from 'classnames';
 import WeatherIcon from 'assets/icons/cloud.svg';
 import {getDailyWeather} from 'actions/weatherAction';
 import './style.scss';
+import {forecastToggle} from "../../actions/weatherAction";
 
 const mapStateToProps = state => ({
   loading: state.loading,
@@ -14,6 +15,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  forecastToggle: () => dispatch(forecastToggle()),
   getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng))
 });
 
@@ -32,6 +34,12 @@ class CurrentWeather extends Component {
     const {isActive} = this.state;
     this.setState({isActive: !isActive});
   }
+  
+  handleForecastClick() {
+    const {forecastToggle} = this.props;
+    forecastToggle();
+  }
+  
   render() {
     const {loading, dailyWeather} = this.props;
     const {isActive} = this.state;
@@ -88,7 +96,7 @@ class CurrentWeather extends Component {
               Wind speed:&nbsp;
             </span>
             <span className='current-weather__wind-speed'>
-              {windSpeed}&nbsp;MPH
+              {windSpeed}&nbsp;MPS
             </span>
           </div>
           <div className='current-weather__wind-wrap'>
@@ -99,8 +107,12 @@ class CurrentWeather extends Component {
               {windDeg}&#176;
             </span>
           </div>
+          <div className='current-weather__btn-wrap'>
+            <button className='current-weather__get-forecast-btn' onClick={::this.handleForecastClick}>
+              Get five days weather forecast
+            </button>
+          </div>
         </div>
-        
       </div>
     );
   }
@@ -109,7 +121,8 @@ class CurrentWeather extends Component {
 CurrentWeather.propTypes = {
   dailyWeather: PropTypes.object,
   loading: PropTypes.bool,
-  userDetails: PropTypes.object
+  userDetails: PropTypes.object,
+  forecastToggle: PropTypes.func
 };
 
 export default CurrentWeather;

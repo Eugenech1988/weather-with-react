@@ -2,30 +2,44 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Loader from 'components/Loader';
 import CurrentWeather from 'components/CurrentWeather';
 import WeatherMap from 'components/WeatherMap';
+import FiveDaysWeather from 'components/FiveDaysWeather';
+import {forecastToggle} from "../../actions/weatherAction";
 
 const mapStateToProps = state => ({
-  dailyWeather: state.weather.dailyWeather
+  dailyWeather: state.weather.dailyWeather,
+  fiveDaysWeather: state.weather.fiveDaysWeather,
+  forecastToggle: state.weather.forecastToggle,
+  loading: state.loading
 });
 
 @connect(mapStateToProps)
 class WeatherMain extends Component {
   render() {
-    const {dailyWeather} = this.props;
+    const {dailyWeather, forecastToggle, loading} = this.props;
     return (
       <div className='weather__wrap'>
-        {dailyWeather &&
+        {!loading &&
+          <Loader/>
+        }
+        {dailyWeather && !forecastToggle &&
         <CurrentWeather/>
         }
-        < WeatherMap />
+        {forecastToggle &&
+        <FiveDaysWeather/>
+        }
+        < WeatherMap/>
       </div>
     );
   }
 }
 
 WeatherMain.propTypes = {
-  dailyWeather: PropTypes.object
+  dailyWeather: PropTypes.object,
+  loading: PropTypes.bool,
+  forecastToggle: PropTypes
 };
 
 export default WeatherMain;

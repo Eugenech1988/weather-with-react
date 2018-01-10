@@ -8,5 +8,5 @@ const request = axios.create({
 });
 
 export const getDailyWeatherApi = (lat, lng) => {
-   return request.get(DAILY_WEATHER_URL + `lat=${lat}&lon=${lng}` + WEATHER_API_KEY);
+  return request.get(DAILY_WEATHER_URL + `lat=${lat}&lon=${lng}` + WEATHER_API_KEY);
 };

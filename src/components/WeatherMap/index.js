@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import {getUserPosition} from 'actions/userAction';
 import {getDailyWeather, getFiveDaysWeather} from 'actions/weatherAction';
-import Loader from 'components/Loader';
 import './style.scss';
 
 const mapStateToProps = state => ({
@@ -58,12 +57,8 @@ export default class WeatherMap extends Component {
   }
   
   render() {
-    const {loading} = this.props;
     return (
       <div className='weather-map'>
-        {!loading &&
-        <Loader/>
-        }
         <div id='map'/>
       </div>
     );
@@ -74,6 +69,5 @@ WeatherMap.propTypes = {
   getFiveDaysWeather: PropTypes.func,
   getDailyWeather: PropTypes.func,
   getUserPosition: PropTypes.func,
-  userDetails: PropTypes.object,
-  loading: PropTypes.bool
+  userDetails: PropTypes.object
 };
