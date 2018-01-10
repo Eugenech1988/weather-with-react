@@ -23,7 +23,7 @@
       bottom: 0;
       background: #cfe7fa url('../../assets/images/Silverlining.jpg') top center no-repeat;
       background-size: cover;
-      box-shadow: inset 0px 0px 14px 10px rgba(255,255,255,.3);
+      box-shadow: inset 0px 0px 14px 10px rgba(255, 255, 255, .3);
       height: 100%;
       width: 100%;
       z-index: -1;
@@ -37,7 +37,7 @@
     }
     opacity: 1;
     background-color: transparent;
-    box-shadow: inset 0px 0px 14px 10px rgba(255,255,255,.3);
+    box-shadow: inset 0px 0px 14px 10px rgba(255, 255, 255, .3);
     transition: width .1s ease, max-height .3s ease;
     width: 100%;
     max-height: 400px;
@@ -119,13 +119,14 @@
 .current-weather__btn-wrap {
   text-align: center;
 }
+
 .current-weather__get-forecast-btn {
   background-color: white;
   margin-top: 15px;
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
-  color: #27b2ff;
+  color: #0071B1;
   cursor: pointer;
   transition: all .4s ease;
   box-shadow: none;
@@ -134,7 +135,46 @@
   }
   &:hover {
     color: white;
-    box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.75), inset 0px 0px 0px 200px #27b2ff;
+    box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.75), inset 0px 0px 0px 200px #0071B1;
+  }
+}
+
+.current-weather__tooltip {
+  position: absolute;
+  top: 65px;
+  right: 10px;
+  display: block;
+  width: 300px;
+  padding: 10px;
+  font-size: 13px;
+  border-radius: 5px;
+  color: white;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50px);
+  max-height: 0;
+  background-color: transparent;
+  box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.75), inset 0px 0px 0px 200px #0071B1;
+  text-align: center;
+  transition: all .3s ease;
+  &:before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 7.5px 10px 7.5px;
+    border-color: transparent transparent #0071B1 transparent;
+    top: -10px;
+    right: 13px;
+  }
+  &--active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    max-height: initial;
+
   }
 }
 

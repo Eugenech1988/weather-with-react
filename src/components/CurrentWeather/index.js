@@ -10,7 +10,7 @@ import {forecastToggle} from "../../actions/weatherAction";
 
 const mapStateToProps = state => ({
   loading: state.loading,
-  userDetails: state.userDetails,
+  // userDetails: state.userDetails,
   dailyWeather: state.weather.dailyWeather
 });
 
@@ -22,12 +22,15 @@ const mapDispatchToProps = dispatch => ({
 @connect(mapStateToProps, mapDispatchToProps)
 class CurrentWeather extends Component {
   state = {
-    isActive: false
+    isActive: false,
+    isTooltip: false
   };
   
-  componentWillReceiveProps(nextProps) {
-    const {userDetails} = nextProps;
-    // getDailyWeather(userDetails.lat, userDetails.lng);
+  componentDidMount() {
+    const {isTooltip} = this.state;
+    setTimeout(() => {
+      this.setState({isTooltip: true});
+    }, 3000);
   }
   
   handleIconClick() {
@@ -42,7 +45,7 @@ class CurrentWeather extends Component {
   
   render() {
     const {loading, dailyWeather} = this.props;
-    const {isActive} = this.state;
+    const {isActive, isTooltip} = this.state;
     const btnCls = cx({
       'current-weather__open-btn': true,
       'current-weather__open-btn current-weather__open-btn--active': isActive
@@ -50,6 +53,10 @@ class CurrentWeather extends Component {
     const wrapCls = cx({
       'current-weather__wrap': true,
       'current-weather__wrap current-weather__wrap--active': isActive
+    });
+    const tooltipCls = cx({
+      'current-weather__tooltip': true,
+      'current-weather__tooltip--active': isTooltip
     });
     const cityName = dailyWeather.name;
     const temp = Math.floor((dailyWeather.main.temp / 10 - 32) * 5 / 9);
@@ -62,6 +69,11 @@ class CurrentWeather extends Component {
         <button className={btnCls} onClick={::this.handleIconClick}>
           <img src={WeatherIcon} alt='' className='current-weather__open-icon'/>
         </button>
+        }
+        {!isActive &&
+        <div className={tooltipCls}>
+           Please tap the button to get weather details
+        </div>
         }
         <div className='current-weather__content-wrap'>
           <h2 className='current-weather__heading'>

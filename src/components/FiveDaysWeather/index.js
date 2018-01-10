@@ -32,7 +32,8 @@ class FiveDaysWeather extends Component {
   }
   
   render() {
-    const {show, fiveDaysWeatherList} = this.state;
+    const {show} = this.state;
+    const {fiveDaysWeatherList} = this.props;
     return (
       <CSSTransition
         in={show}
