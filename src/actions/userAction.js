@@ -1,5 +1,5 @@
 import {startLoading, finishLoading} from 'actions/loaderAction';
-import {getPosition} from 'helpers/helpers';
+import {getUserPositionApi} from 'helpers/helpers';
 import {GET_USER_COORS_SUCCESS, GET_USER_COORS_ERROR} from 'constants/userConstants';
 
 export const getUserCoorsSuccess = (lat, lng) => {
@@ -18,17 +18,17 @@ export const getUserCoorsError = () => {
 
 export const getUserPosition = () => dispatch => {
   dispatch(startLoading());
-  getPosition()
-    .then((position) => {
-      console.log(position);
-      const coords = position.coords;
+  getUserPositionApi()
+    .then((res) => {
+      console.log(res);
+      const coords = res.coords;
       dispatch(getUserCoorsSuccess(coords.latitude, coords.longitude));
       dispatch(finishLoading());
     })
     .catch((err) => {
       console.error(err.message);
-      dispatch(finishLoading());
       dispatch(getUserCoorsError());
+      dispatch(finishLoading());
     });
 };
 

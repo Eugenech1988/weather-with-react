@@ -6,15 +6,31 @@
   transition: width .1s ease, max-height .3s ease;
   width: 0;
   max-height: 0;
-  background: #cfe7fa; /* Old browsers */
-  background: -moz-linear-gradient(top, #cfe7fa 0%, #6393c1 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #cfe7fa 0%,#6393c1 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #cfe7fa 0%,#6393c1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#6393c1',GradientType=0 ); /* IE6-9 */
+  padding: 10px 15px;
+  .current-weather__content-wrap {
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
   &--active {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #cfe7fa url('../../assets/images/Silverlining.jpg') center center no-repeat;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      opacity: .9;
+    }
+    .current-weather__content-wrap {
+      opacity: 1;
+    }
     transition: width .1s ease, max-height .3s ease;
     width: 100%;
-    max-height: 70px;
+    max-height: 400px;
     height: 100%;
   }
 }
@@ -52,4 +68,24 @@
   100% {
     opacity: 1;
   }
+}
+
+.current-weather__heading {
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.current-weather__temp,
+.current-weather__temp-label,
+.current-weather__town-label,
+.current-weather__town {
+  color: white;
+  font-size: 14px;
+  line-height: 14px;
 }

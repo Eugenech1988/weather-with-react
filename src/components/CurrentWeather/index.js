@@ -4,24 +4,28 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import WeatherIcon from 'assets/icons/cloud.svg';
+import {getDailyWeather} from 'actions/weatherAction';
 import './style.scss';
-import {getDialyWeather} from "../../api/GET/dialyWeather";
-import {userDetails} from "../../reducers/userReducer";
 
 const mapStateToProps = state => ({
   loading: state.loading,
-  userDetails: state.userDetails
+  userDetails: state.userDetails,
+  dialyWeather: state.weather.dialyWeather
 });
 
-@connect(mapStateToProps)
+const mapDispatchToProps = dispatch => ({
+  getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng))
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
 class CurrentWeather extends Component {
   state = {
     isActive: false
   };
   
   componentWillReceiveProps(nextProps) {
-    const userDetails = nextProps.userDetails;
-    getDialyWeather(userDetails.lat, userDetails.lng);
+    const {userDetails} = nextProps;
+    // getDailyWeather(userDetails.lat, userDetails.lng);
   }
   
   handleIconClick() {
@@ -29,7 +33,7 @@ class CurrentWeather extends Component {
     this.setState({isActive: !isActive});
   }
   render() {
-    const {loading} = this.props;
+    const {loading, dialyWeather} = this.props;
     const {isActive} = this.state;
     const btnCls = cx({
       'current-weather__open-btn': true,
@@ -46,12 +50,34 @@ class CurrentWeather extends Component {
           <img src={WeatherIcon} alt='' className='current-weather__open-icon'/>
         </button>
         }
+        <div className='current-weather__content-wrap'>
+          <h2 className='current-weather__heading'>
+            Current weather on your location
+          </h2>
+          <div className='current-weather__town-wrap'>
+            <span className='current-weather__town-label'>
+              Your location:&nbsp;
+            </span>
+            <span className='current-weather__town'>
+              {dialyWeather.name}
+            </span>
+          </div>
+          <div className='current-weather__temp-wrap'>
+            <span className='current-weather__temp-label'>
+              Current temperature:&nbsp;
+            </span>
+            <span className='current-weather__temp'>
+              {dialyWeather}
+            </span>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 CurrentWeather.propTypes = {
+  dialyWeather: PropTypes.object,
   loading: PropTypes.bool,
   userDetails: PropTypes.object
 };

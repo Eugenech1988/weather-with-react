@@ -1,12 +1,12 @@
 import axios from 'axios';
+import {DAILY_WEATHER_URL} from '../urls';
 
-export const getDialyWeather = (lat, lng) => {
-  axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}`)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  
+const GOOGLE_API_KEY = '&APPID=74912ffa2afea93eca5527c7013a6f9b';
+
+const request = axios.create({
+  timeout: 1200000
+});
+
+export const getDailyWeatherApi = (lat, lng) => {
+   return request.get(DAILY_WEATHER_URL + `lat=${lat}&lon=${lng}` + GOOGLE_API_KEY);
 };

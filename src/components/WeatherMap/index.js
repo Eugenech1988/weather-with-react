@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {getUserPosition} from 'actions/userAction';
+import {getDailyWeather} from 'actions/weatherAction';
 import Loader from 'components/Loader';
 import './style.scss';
 
@@ -12,7 +13,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getUserPosition: () => dispatch(getUserPosition())
+  getUserPosition: () => dispatch(getUserPosition()),
+  getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng))
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -23,7 +25,8 @@ export default class WeatherMap extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    const userDetails = nextProps.userDetails;
+    const {userDetails, getDailyWeather} = nextProps;
+    getDailyWeather(userDetails.lat, userDetails.lng);
     const mapDiv = document.getElementById('map');
     if (mapDiv) {
       const center = {lat: userDetails.lat, lng: userDetails.lng};
@@ -43,7 +46,7 @@ export default class WeatherMap extends Component {
         map.setCenter(center);
       });
       // window.google.maps.event.addListener(map, 'click', function( event ){
-      //   alert( "Latitude: "+event.latLng.lat()+" "+", longitude: "+event.latLng.lng() );
+      //   alert( 'Latitude: '+event.latLng.lat()+' '+', longitude: '+event.latLng.lng() );
       // });
     }
   }
@@ -66,6 +69,7 @@ export default class WeatherMap extends Component {
 }
 
 WeatherMap.propTypes = {
+  getDailyWeather: PropTypes.func,
   getUserPosition: PropTypes.func,
   userDetails: PropTypes.object,
   loading: PropTypes.bool
