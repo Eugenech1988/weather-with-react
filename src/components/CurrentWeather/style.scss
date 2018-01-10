@@ -20,6 +20,7 @@
       right: 0;
       bottom: 0;
       background: #cfe7fa url('../../assets/images/Silverlining.jpg') center center no-repeat;
+      box-shadow: inset 0px 0px 14px 10px rgba(255,255,255,.3);
       height: 100%;
       width: 100%;
       z-index: -1;
@@ -28,6 +29,9 @@
     .current-weather__content-wrap {
       opacity: 1;
     }
+    opacity: 1;
+    background-color: transparent;
+    box-shadow: inset 0px 0px 14px 10px rgba(255,255,255,.3);
     transition: width .1s ease, max-height .3s ease;
     width: 100%;
     max-height: 400px;
@@ -81,6 +85,12 @@
   margin-bottom: 15px;
 }
 
+.current-weather__wind-speed-label,
+.current-weather__wind-speed,
+.current-weather__wind-deg,
+.current-weather__wind-deg-label,
+.current-weather__draft-label,
+.current-weather__draft,
 .current-weather__temp,
 .current-weather__temp-label,
 .current-weather__town-label,
@@ -88,4 +98,11 @@
   color: white;
   font-size: 14px;
   line-height: 14px;
+}
+
+.current-weather__wind-wrap,
+.current-weather__draft-wrap,
+.current-weather__temp-wrap,
+.current-weather__town-wrap {
+  margin-bottom: 10px;
 }

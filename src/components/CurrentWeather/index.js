@@ -10,7 +10,7 @@ import './style.scss';
 const mapStateToProps = state => ({
   loading: state.loading,
   userDetails: state.userDetails,
-  dialyWeather: state.weather.dialyWeather
+  dailyWeather: state.weather.dailyWeather
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -33,7 +33,7 @@ class CurrentWeather extends Component {
     this.setState({isActive: !isActive});
   }
   render() {
-    const {loading, dialyWeather} = this.props;
+    const {loading, dailyWeather} = this.props;
     const {isActive} = this.state;
     const btnCls = cx({
       'current-weather__open-btn': true,
@@ -43,6 +43,11 @@ class CurrentWeather extends Component {
       'current-weather__wrap': true,
       'current-weather__wrap current-weather__wrap--active': isActive
     });
+    const cityName = dailyWeather.name;
+    const temp = Math.floor((dailyWeather.main.temp / 10 - 32) * 5 / 9);
+    const drafts = dailyWeather.weather[0].main;
+    const windSpeed = dailyWeather.wind.speed;
+    const windDeg = dailyWeather.wind.deg;
     return (
       <div className={wrapCls}>
         {loading &&
@@ -59,7 +64,7 @@ class CurrentWeather extends Component {
               Your location:&nbsp;
             </span>
             <span className='current-weather__town'>
-              {dialyWeather.name}
+              {cityName}
             </span>
           </div>
           <div className='current-weather__temp-wrap'>
@@ -67,17 +72,42 @@ class CurrentWeather extends Component {
               Current temperature:&nbsp;
             </span>
             <span className='current-weather__temp'>
-              {dialyWeather}
+              {temp}&nbsp;&#176;C
+            </span>
+          </div>
+          <div className='current-weather__draft-wrap'>
+            <span className='current-weather__draft-label'>
+              Weather drafts:&nbsp;
+            </span>
+            <span className='current-weather__draft'>
+              {drafts}
+            </span>
+          </div>
+          <div className='current-weather__wind-wrap'>
+            <span className='current-weather__wind-speed-label'>
+              Wind speed:&nbsp;
+            </span>
+            <span className='current-weather__wind-speed'>
+              {windSpeed}&nbsp;MPH
+            </span>
+          </div>
+          <div className='current-weather__wind-wrap'>
+            <span className='current-weather__wind-deg-label'>
+              Wind degrees:&nbsp;
+            </span>
+            <span className='current-weather__wind-deg'>
+              {windDeg}&#176;
             </span>
           </div>
         </div>
+        
       </div>
     );
   }
 }
 
 CurrentWeather.propTypes = {
-  dialyWeather: PropTypes.object,
+  dailyWeather: PropTypes.object,
   loading: PropTypes.bool,
   userDetails: PropTypes.object
 };

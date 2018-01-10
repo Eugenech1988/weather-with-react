@@ -1,4 +1,4 @@
-import {getDailyWeatherApi} from 'api/GET/dialyWeather';
+import {getDailyWeatherApi} from 'api/GET/dailyWeather';
 import {GET_DIALY_WEATHER_ERROR, GET_DIALY_WEATHER_SUCCESS} from 'constants/weatherConst';
 
 export const getDailyWeatherSuccess = (data) => {
