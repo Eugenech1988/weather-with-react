@@ -10,6 +10,7 @@
   .current-weather__content-wrap {
     opacity: 0;
     transition: opacity .3s ease;
+    position: absolute;
   }
   &--active {
     &:before {
@@ -19,15 +20,19 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #cfe7fa url('../../assets/images/Silverlining.jpg') center center no-repeat;
+      background: #cfe7fa url('../../assets/images/Silverlining.jpg') top center no-repeat;
+      background-size: cover;
       box-shadow: inset 0px 0px 14px 10px rgba(255,255,255,.3);
       height: 100%;
       width: 100%;
       z-index: -1;
-      opacity: .9;
+      opacity: .7;
     }
     .current-weather__content-wrap {
       opacity: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
     opacity: 1;
     background-color: transparent;

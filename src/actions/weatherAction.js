@@ -1,16 +1,16 @@
 import {getDailyWeatherApi} from 'api/GET/dailyWeather';
-import {GET_DIALY_WEATHER_ERROR, GET_DIALY_WEATHER_SUCCESS} from 'constants/weatherConst';
+import {GET_DAILY_WEATHER_ERROR, GET_DAILY_WEATHER_SUCCESS} from 'constants/weatherConst';
 
 export const getDailyWeatherSuccess = (data) => {
   return ({
-    type: GET_DIALY_WEATHER_SUCCESS,
+    type: GET_DAILY_WEATHER_SUCCESS,
     data
   });
 };
 
 export const getDailyWeatherError = (data) => {
   return ({
-    type: GET_DIALY_WEATHER_ERROR,
+    type: GET_DAILY_WEATHER_ERROR,
     data
   });
 };
