@@ -8,5 +8,5 @@ const request = axios.create({
 });
 
 export const geFiveDaysWeatherApi = (lat, lng) => {
-	return request.get(FIVE_DAYS_WEATHER_URL + `lat=${lat}&lon=${lng}` + GOOGLE_API_KEY);
+	return request.get(FIVE_DAYS_WEATHER_URL + `lat=${lat}&lon=${lng}` + WEATHER_API_KEY);
 };

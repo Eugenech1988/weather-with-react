@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {getUserPosition} from 'actions/userAction';
-import {getDailyWeather} from 'actions/weatherAction';
+import {getDailyWeather, getFiveDaysWeather} from 'actions/weatherAction';
 import Loader from 'components/Loader';
 import './style.scss';
 
@@ -14,7 +14,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUserPosition: () => dispatch(getUserPosition()),
-  getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng))
+  getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng)),
+  getFiveDaysWeather: (lat, lng) => dispatch(getFiveDaysWeather(lat, lng))
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -25,8 +26,9 @@ export default class WeatherMap extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    const {userDetails, getDailyWeather} = nextProps;
+    const {userDetails, getDailyWeather, getFiveDaysWeather} = nextProps;
     getDailyWeather(userDetails.lat, userDetails.lng);
+    getFiveDaysWeather(userDetails.lat, userDetails.lng);
     const mapDiv = document.getElementById('map');
     if (mapDiv) {
       const center = {lat: userDetails.lat, lng: userDetails.lng};
@@ -69,6 +71,7 @@ export default class WeatherMap extends Component {
 }
 
 WeatherMap.propTypes = {
+  getFiveDaysWeather: PropTypes.func,
   getDailyWeather: PropTypes.func,
   getUserPosition: PropTypes.func,
   userDetails: PropTypes.object,
