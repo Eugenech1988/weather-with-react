@@ -6,7 +6,7 @@ import Loader from 'components/Loader';
 import CurrentWeather from 'components/CurrentWeather';
 import WeatherMap from 'components/WeatherMap';
 import FiveDaysWeather from 'components/FiveDaysWeather';
-import CustomCoordsWeather from 'components/FiveDaysWeather';
+import CustomCoordsWeather from 'components/CustomCoordsWeather';
 
 const mapStateToProps = state => ({
   dailyWeather: state.weather.dailyWeather,
@@ -22,8 +22,9 @@ class WeatherMain extends Component {
     return (
       <div className='weather__wrap'>
         {!loading && <Loader/>}
-        {dailyWeather && !forecastToggle && <CurrentWeather/>}
-        {forecastToggle && <FiveDaysWeather/>}
+        {loading && dailyWeather !== null && !forecastToggle && <CurrentWeather/>}
+        {loading && dailyWeather !== null && !forecastToggle && <CustomCoordsWeather/>}
+        {loading && forecastToggle && <FiveDaysWeather/>}
         < WeatherMap/>
       </div>
     );

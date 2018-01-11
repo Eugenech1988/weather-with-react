@@ -67,7 +67,7 @@ class FiveDaysWeather extends Component {
                 </div>
               </div>
               <div className='forecast-weather__content-wrap'>
-                {fiveDaysWeatherList.map(item => {
+                {fiveDaysWeatherList && fiveDaysWeatherList.map(item => {
                   const key = Math.random();
                   const date = item.dt_txt.substr(0, item.dt_txt.length - 9);
                   const time = item.dt_txt.slice(10);
