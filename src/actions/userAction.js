@@ -1,7 +1,6 @@
 import {startLoading, finishLoading} from 'actions/loaderAction';
 import {getUserPositionApi} from 'helpers/helpers';
-import {GET_USER_COORDS_SUCCESS, GET_USER_COORDS_ERROR} from 'constants/userConstants';
-import {SET_CUSTOM_COORDS} from "../constants/userConstants";
+import {GET_USER_COORDS_SUCCESS, GET_USER_COORDS_ERROR, SET_CUSTOM_COORDS, TOOLTIP_INIT} from 'constants/userConstants';
 
 export const getUserCoordsSuccess = (lat, lng) => {
   return ({
@@ -22,6 +21,13 @@ export const setCustomCoords = (lat, lng) => {
     lat,
     lng,
     type: SET_CUSTOM_COORDS
+  });
+};
+
+export const tooltipInit = (data) => {
+  return ({
+    type: TOOLTIP_INIT,
+    data
   });
 };
 

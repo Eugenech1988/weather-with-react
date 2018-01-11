@@ -4,18 +4,20 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import WeatherIcon from 'assets/icons/cloud.svg';
-import {getDailyWeather} from 'actions/weatherAction';
+import {getDailyWeather, forecastToggle} from 'actions/weatherAction';
 import './style.scss';
-import {forecastToggle} from 'actions/weatherAction';
+import {tooltipInit} from 'actions/userAction';
 
 const mapStateToProps = state => ({
   loading: state.loading,
-  dailyWeather: state.weather.dailyWeather
+  dailyWeather: state.weather.dailyWeather,
+  tooltipInited: state.userDetails.tooltipInited
 });
 
 const mapDispatchToProps = dispatch => ({
   forecastToggle: () => dispatch(forecastToggle()),
-  getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng))
+  getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng)),
+  tooltipInit: () => dispatch(tooltipInit())
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -26,9 +28,13 @@ class CurrentWeather extends Component {
   };
   
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({isTooltip: true});
-    }, 3000);
+    const {tooltipInited, tooltipInit} = this.props;
+    if (!tooltipInited) {
+      setTimeout(() => {
+        this.setState({isTooltip: true});
+        tooltipInit();
+      }, 3000);
+    }
   }
   
   handleIconClick() {
@@ -132,7 +138,9 @@ CurrentWeather.propTypes = {
   dailyWeather: PropTypes.object,
   loading: PropTypes.bool,
   userDetails: PropTypes.object,
-  forecastToggle: PropTypes.func
+  forecastToggle: PropTypes.func,
+  tooltipInit: PropTypes.func,
+  tooltipInited: PropTypes.bool
 };
 
 export default CurrentWeather;
