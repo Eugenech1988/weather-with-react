@@ -41,7 +41,7 @@ export default class WeatherMap extends Component {
     const mapDiv = document.getElementById('map');
     if (mapDiv) {
       let center = {lat: userDetails.lat, lng: userDetails.lng};
-      const zoom = 16;
+      const zoom = 14;
       const map = new window.google.maps.Map(mapDiv, {
         zoom,
         center,
@@ -56,13 +56,13 @@ export default class WeatherMap extends Component {
       window.google.maps.event.addDomListener(window, 'resize', () => {
         map.setCenter(center);
       });
-      // window.google.maps.event.addListener(map, 'click', function( event ){
-      //   const customLat = event.latLng.lat();
-      //   const customLng = event.latLng.lng();
-      //   setCustomCoords(customLat, customLng);
-      //   center = {lat: customLat, lng: customLng};
-      //   map.setCenter(center);
-      // });
+      window.google.maps.event.addListener(map, 'click', function( event ){
+        const customLat = event.latLng.lat();
+        const customLng = event.latLng.lng();
+        setCustomCoords(customLat, customLng);
+        center = {lat: customLat, lng: customLng};
+        map.setCenter(center);
+      });
     }
   }
   

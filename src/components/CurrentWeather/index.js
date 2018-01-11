@@ -26,7 +26,6 @@ class CurrentWeather extends Component {
   };
   
   componentDidMount() {
-    const {isTooltip} = this.state;
     setTimeout(() => {
       this.setState({isTooltip: true});
     }, 3000);

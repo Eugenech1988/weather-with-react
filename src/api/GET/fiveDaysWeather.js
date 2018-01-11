@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {FIVE_DAYS_WEATHER_URL} from '../urls';
 
-const WEATHER_API_KEY = '&APPID=74912ffa2afea93eca5527c7013a6f9b';
+const WEATHER_API_KEY = '&APPID=980fe731c6ad0e78948f7b01b1e5a936';
 
 const request = axios.create({
 	timeout: 1200000

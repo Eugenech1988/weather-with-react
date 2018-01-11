@@ -23,7 +23,7 @@ class WeatherMain extends Component {
         {!loading &&
           <Loader/>
         }
-        {dailyWeather !== null && !forecastToggle &&
+        {dailyWeather && !forecastToggle &&
         <CurrentWeather/>
         }
         {forecastToggle &&
