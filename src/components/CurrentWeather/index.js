@@ -6,11 +6,10 @@ import cx from 'classnames';
 import WeatherIcon from 'assets/icons/cloud.svg';
 import {getDailyWeather} from 'actions/weatherAction';
 import './style.scss';
-import {forecastToggle} from "../../actions/weatherAction";
+import {forecastToggle} from 'actions/weatherAction';
 
 const mapStateToProps = state => ({
   loading: state.loading,
-  // userDetails: state.userDetails,
   dailyWeather: state.weather.dailyWeather
 });
 
@@ -61,8 +60,8 @@ class CurrentWeather extends Component {
     const cityName = dailyWeather.name;
     const temp = Math.floor((dailyWeather.main.temp / 10 - 32) * 5 / 9);
     const drafts = dailyWeather.weather[0].main;
-    const windSpeed = Math.floor(dailyWeather.wind.speed.toFixed(1));
-    const windDeg = Math.floor(dailyWeather.wind.deg.toFixed(1));
+    const windSpeed = Math.floor(Number(dailyWeather.wind.speed.toFixed(1)));
+    const windDeg = Math.floor(Number(dailyWeather.wind.deg.toFixed(1)));
     return (
       <div className={wrapCls}>
         {loading &&

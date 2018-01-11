@@ -1,18 +1,27 @@
 import {startLoading, finishLoading} from 'actions/loaderAction';
 import {getUserPositionApi} from 'helpers/helpers';
-import {GET_USER_COORS_SUCCESS, GET_USER_COORS_ERROR} from 'constants/userConstants';
+import {GET_USER_COORDS_SUCCESS, GET_USER_COORDS_ERROR} from 'constants/userConstants';
+import {SET_CUSTOM_COORDS} from "../constants/userConstants";
 
-export const getUserCoorsSuccess = (lat, lng) => {
+export const getUserCoordsSuccess = (lat, lng) => {
   return ({
     lat,
     lng,
-    type: GET_USER_COORS_SUCCESS
+    type: GET_USER_COORDS_SUCCESS
   });
 };
 
-export const getUserCoorsError = () => {
+export const getUserCoordsError = () => {
   return ({
-    type: GET_USER_COORS_ERROR
+    type: GET_USER_COORDS_ERROR
+  });
+};
+
+export const setCustomCoords = (lat, lng) => {
+  return ({
+    lat,
+    lng,
+    type: SET_CUSTOM_COORDS
   });
 };
 
@@ -22,12 +31,12 @@ export const getUserPosition = () => dispatch => {
     .then((res) => {
       console.log(res);
       const coords = res.coords;
-      dispatch(getUserCoorsSuccess(coords.latitude, coords.longitude));
+      dispatch(getUserCoordsSuccess(coords.latitude, coords.longitude));
       dispatch(finishLoading());
     })
     .catch((err) => {
       console.error(err.message);
-      dispatch(getUserCoorsError());
+      dispatch(getUserCoordsError());
       dispatch(finishLoading());
     });
 };

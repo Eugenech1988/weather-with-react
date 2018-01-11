@@ -23,7 +23,7 @@ class WeatherMain extends Component {
         {!loading &&
           <Loader/>
         }
-        {dailyWeather && !forecastToggle &&
+        {dailyWeather !== null && !forecastToggle &&
         <CurrentWeather/>
         }
         {forecastToggle &&
@@ -38,7 +38,7 @@ class WeatherMain extends Component {
 WeatherMain.propTypes = {
   dailyWeather: PropTypes.object,
   loading: PropTypes.bool,
-  forecastToggle: PropTypes
+  forecastToggle: PropTypes.bool
 };
 
 export default WeatherMain;

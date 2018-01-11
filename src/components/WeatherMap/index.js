@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {CSSTransition} from 'react-transition-group';
 
-import {getUserPosition} from 'actions/userAction';
+import {getUserPosition, setCustomCoords} from 'actions/userAction';
 import {getDailyWeather, getFiveDaysWeather} from 'actions/weatherAction';
 import './style.scss';
 
@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getUserPosition: () => dispatch(getUserPosition()),
   getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng)),
-  getFiveDaysWeather: (lat, lng) => dispatch(getFiveDaysWeather(lat, lng))
+  getFiveDaysWeather: (lat, lng) => dispatch(getFiveDaysWeather(lat, lng)),
+  setCustomCoords: (lat, lng) => dispatch(setCustomCoords(lat, lng))
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -34,12 +35,12 @@ export default class WeatherMap extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    const {userDetails, getDailyWeather, getFiveDaysWeather} = nextProps;
+    const {userDetails, getDailyWeather, getFiveDaysWeather, setCustomCoords} = nextProps;
     getDailyWeather(userDetails.lat, userDetails.lng);
     getFiveDaysWeather(userDetails.lat, userDetails.lng);
     const mapDiv = document.getElementById('map');
     if (mapDiv) {
-      const center = {lat: userDetails.lat, lng: userDetails.lng};
+      let center = {lat: userDetails.lat, lng: userDetails.lng};
       const zoom = 16;
       const map = new window.google.maps.Map(mapDiv, {
         zoom,
@@ -56,7 +57,11 @@ export default class WeatherMap extends Component {
         map.setCenter(center);
       });
       // window.google.maps.event.addListener(map, 'click', function( event ){
-      //   alert( 'Latitude: '+event.latLng.lat()+' '+', longitude: '+event.latLng.lng() );
+      //   const customLat = event.latLng.lat();
+      //   const customLng = event.latLng.lng();
+      //   setCustomCoords(customLat, customLng);
+      //   center = {lat: customLat, lng: customLng};
+      //   map.setCenter(center);
       // });
     }
   }
@@ -85,5 +90,6 @@ WeatherMap.propTypes = {
   getFiveDaysWeather: PropTypes.func,
   getDailyWeather: PropTypes.func,
   getUserPosition: PropTypes.func,
+  setCustomCoords: PropTypes.func,
   userDetails: PropTypes.object
 };
