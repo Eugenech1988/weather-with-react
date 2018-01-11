@@ -1,5 +1,6 @@
 import {getDailyWeatherApi} from 'api/GET/dailyWeather';
 import {geFiveDaysWeatherApi} from 'api/GET/fiveDaysWeather';
+import {startLoading, finishLoading} from "./loaderAction";
 
 import {
   GET_DAILY_WEATHER_ERROR,
@@ -58,6 +59,29 @@ export const getFiveDaysWeather = (lat, lng) => dispatch => {
     .catch(err => {
       console.log(err);
       dispatch(getFiveDaysWeatherError());
+    });
+};
+
+export const getAllWeather = (lat,lng) => dispatch => {
+  dispatch(startLoading());
+  geFiveDaysWeatherApi(lat, lng)
+    .then(res => {
+      console.log(res);
+      dispatch(getFiveDaysWeatherSuccess(res.data));
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(getFiveDaysWeatherError());
+    });
+  getDailyWeatherApi(lat, lng)
+    .then(res => {
+      console.log(res);
+      dispatch(getDailyWeatherSuccess(res.data));
+      dispatch(finishLoading());
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(getDailyWeatherError());
     });
 };
 

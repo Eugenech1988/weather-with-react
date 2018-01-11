@@ -2,25 +2,23 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {getFiveDaysWeather, getDailyWeather} from "actions/weatherAction";
 import './style.scss';
 import ccWeatherIcon from 'assets/icons/coords.svg';
+import {getAllWeather} from 'actions/weatherAction';
 
 const mapStateToProps = state => ({
   userDetails: state.userDetails
 });
 
 const dispatchMapToProps = dispatch => ({
-  getDailyWeather: (lat, lng) => dispatch(getDailyWeather(lat, lng)),
-  getFiveDaysWeather: (lat, lng) => dispatch(getFiveDaysWeather(lat, lng))
+  getAllWeather: (lat, lng) => dispatch(getAllWeather(lat, lng))
 });
 
 @connect(mapStateToProps, dispatchMapToProps)
 class CustomCoordsWeather extends Component {
   handleClick() {
-    const {getDailyWeather, getFiveDaysWeather, userDetails} = this.props;
-    getDailyWeather(userDetails.lat, userDetails.lng);
-    getFiveDaysWeather(userDetails.lat, userDetails.lng);
+    const {getAllWeather, userDetails} = this.props;
+    getAllWeather(userDetails.lat, userDetails.lng)
   }
   render() {
     return (
@@ -37,8 +35,7 @@ class CustomCoordsWeather extends Component {
 }
 
 CustomCoordsWeather.propTypes = {
-  getFiveDaysWeather: PropTypes.func,
-  getDailyWeather: PropTypes.func,
+  getAllWeather: PropTypes.func,
   userDetails: PropTypes.object
 };
 
